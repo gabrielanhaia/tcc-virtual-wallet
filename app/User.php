@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'access_type_id',
     ];
 
     /**
@@ -26,4 +26,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get the access type of user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasOne
+     */
+    public function accessType()
+    {
+        return $this->hasOne(AccessType::class);
+    }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTypeAccessUsers extends Migration
+class CreateAccessTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,15 @@ class CreateTypeAccessUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::create('access_types', function (Blueprint $table) {
+            $table->increments('id');
             $table->enum('type', [
                 'student',
                 'teacher',
                 'admin',
-                'developer'
+                'developer',
             ]);
+            $table->timestamps();
         });
     }
 
@@ -30,6 +32,6 @@ class CreateTypeAccessUsers extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('access_types');
     }
 }
