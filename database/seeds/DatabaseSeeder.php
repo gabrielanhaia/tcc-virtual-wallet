@@ -14,23 +14,7 @@ class DatabaseSeeder extends Seeder
     {
         Eloquent::unguard();
 
-        $this->call('TebleUserSeeder');
-    }
-}
-
-class TebleUserSeeder extends Seeder
-{
-    public function run()
-    {
-        $usuarios = User::get();
-
-        if($usuarios->count() == 0) {
-            User::create(array(
-                'email' => 'admin@mail.com',
-                'password' => Hash::make('admin'),
-                'name'  => 'System Admin',
-                'type'  => 'admin'
-            ));
-        }
+        $this->call(AccessTypeSeeder::class);
+        $this->call(UserSeeder::class);
     }
 }
